@@ -144,10 +144,10 @@ const createPost = asyncHandler(async (req, res) => {
   const images =
     req.files.images && req.files.images?.length
       ? req.files.images.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
+        const imageUrl = getStaticFilePath(req, image.filename);
+        const imageLocalPath = getLocalPath(image.filename);
+        return { url: imageUrl, localPath: imageLocalPath };
+      })
       : [];
 
   const author = req.user._id;
@@ -196,10 +196,10 @@ const updatePost = asyncHandler(async (req, res) => {
     // If user has uploaded new images then we have to create an object with new url and local path in the array format
     req.files?.images && req.files.images?.length
       ? req.files.images.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
+        const imageUrl = getStaticFilePath(req, image.filename);
+        const imageLocalPath = getLocalPath(image.filename);
+        return { url: imageUrl, localPath: imageLocalPath };
+      })
       : []; // if there are no new images uploaded we want to keep an empty array
 
   const existedImages = post.images.length; // total images already present in the post
@@ -219,10 +219,10 @@ const updatePost = asyncHandler(async (req, res) => {
     throw new ApiError(
       400,
       "Maximum " +
-        MAXIMUM_SOCIAL_POST_IMAGE_COUNT +
-        " images are allowed for a post. There are already " +
-        existedImages +
-        " images attached to the post."
+      MAXIMUM_SOCIAL_POST_IMAGE_COUNT +
+      " images are allowed for a post. There are already " +
+      existedImages +
+      " images attached to the post."
     );
   }
 

@@ -61,10 +61,10 @@ const createProduct = asyncHandler(async (req, res) => {
   const subImages =
     req.files.subImages && req.files.subImages?.length
       ? req.files.subImages.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
+        const imageUrl = getStaticFilePath(req, image.filename);
+        const imageLocalPath = getLocalPath(image.filename);
+        return { url: imageUrl, localPath: imageLocalPath };
+      })
       : [];
 
   const owner = req.user._id;
@@ -100,10 +100,10 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const mainImage = req.files?.mainImage?.length
     ? {
-        // If user has uploaded new main image then we have to create an object with new url and local path in the project
-        url: getStaticFilePath(req, req.files?.mainImage[0]?.filename),
-        localPath: getLocalPath(req.files?.mainImage[0]?.filename),
-      }
+      // If user has uploaded new main image then we have to create an object with new url and local path in the project
+      url: getStaticFilePath(req, req.files?.mainImage[0]?.filename),
+      localPath: getLocalPath(req.files?.mainImage[0]?.filename),
+    }
     : product.mainImage; // if there is no new main image uploaded we will stay with the old main image of the product
 
   /**
@@ -113,10 +113,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     // If user has uploaded new sub images then we have to create an object with new url and local path in the array format
     req.files?.subImages && req.files.subImages?.length
       ? req.files.subImages.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
+        const imageUrl = getStaticFilePath(req, image.filename);
+        const imageLocalPath = getLocalPath(image.filename);
+        return { url: imageUrl, localPath: imageLocalPath };
+      })
       : []; // if there are no new sub images uploaded we want to keep an empty array
 
   const existedSubImages = product.subImages.length; // total sub images already present in the project
@@ -139,10 +139,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new ApiError(
       400,
       "Maximum " +
-        MAXIMUM_SUB_IMAGE_COUNT +
-        " sub images are allowed for a product. There are already " +
-        existedSubImages +
-        " sub images attached to the product."
+      MAXIMUM_SUB_IMAGE_COUNT +
+      " sub images are allowed for a product. There are already " +
+      existedSubImages +
+      " sub images attached to the product."
     );
   }
 
